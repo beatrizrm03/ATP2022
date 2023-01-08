@@ -1,1 +1,63 @@
+#ABRI OS DATASETS
+import json
+
+file=open("dataset.json",encoding="UTF8") # para abrir o primeiro dataset
+pessoas1 = json.load(file)
+listavalues1=list(pessoas1.values())
+file.close()
+
+file=open("dataset-extra1.json",encoding="UTF8")   # para abrir o primeiro dataset extra
+pessoas2 = json.load(file)
+listavalues2=list(pessoas2.values())
+file.close()
+
+print(pessoas1)
+
+
+
+
+#6-listar por ordem alfabética
+file=open("dataset.json",encoding="UTF8") 
+pessoas=json.load(file)
+
+def listar_alfabetica(dict):
+    keys=dict["pessoas"]
+    listaalfabeticanomes=[]     #lista vazia, para acrescentar os nomes por ordem alfabetica
+    for pessoa in keys:         #percorrer a lista 
+        listaalfabeticanomes.append(pessoa["nome"])    #acrescentar todos os nomes de cada pessoa
+    listaalfabeticanomes.sort()                        #colocar em ordem alfabetica 
+    return listaalfabeticanomes
+listar_alfabetica(pessoas)
+
+
+file=open("dataset.json",encoding="UTF8") 
+populacao=json.load(file)
+def distrib_profissao(profissoes):
+    res={}
+    for pessoa in populacao['pessoas']:
+        if pessoa ['profissao'] in res.keys():
+            res [pessoa['profissao']]  += 1
+        else:
+            res[pessoa['profissao']] =1
+    return res
+distrib_profissao(file)
+
+
+
+file=open("dataset.json",encoding="UTF8") 
+populacao=json.load(file)
+def distrib_desporto(profissoes):
+    res={}
+    for pessoa in populacao['pessoas']:         #PARA CADA PESSOA NA POPULAÇÃO
+        for desporto in pessoa['desportos']:    #PARA O DESPORTO DE CADA PESSOA
+            if desporto in res.keys():          
+                res [desporto]  += 1
+            else:
+                res[desporto] =1
+    for desporto in sorted(res, key = res.get, reverse=True):   #ORDENAR DE FORMA DECRESCENTE 
+        print(desporto, res[desporto[:10]])                        # ATE O TOP 10
+    return res
+distrib_desporto(file)
+
+
 
